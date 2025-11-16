@@ -10,6 +10,14 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+
+print(f"Токен загружен: {'Да' if TOKEN else 'Нет'}")
+print(f"Длина токена: {len(TOKEN) if TOKEN else 0}")
+
+if not TOKEN:
+    print("❌ ОШИБКА: Токен не найден в .env файле!")
+    exit(1)
 
 intents = discord.Intents.default()
 intents.members = True
@@ -565,4 +573,5 @@ async def reset_password(interaction: discord.Interaction):
         await interaction.response.send_message("❌ У вас нет активной приватной комнаты!", ephemeral=True)
 
 TOKEN = os.getenv('DISCORD_TOKEN')
+
 bot.run(TOKEN)
