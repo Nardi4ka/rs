@@ -58,7 +58,7 @@ intents.members = True
 intents.message_content = True
 intents.voice_states = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = discord.Bot(intents=intents)
 
 # Хранилище
 temp_channels = {}
@@ -609,4 +609,5 @@ async def reset_password(interaction: discord.Interaction):
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot.run(TOKEN)
+
 
