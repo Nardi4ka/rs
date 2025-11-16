@@ -18,6 +18,40 @@ print(f"Длина токена: {len(TOKEN) if TOKEN else 0}")
 if not TOKEN:
     print("❌ ОШИБКА: Токен не найден в .env файле!")
     exit(1)
+    print("🔧 1. Начало загрузки...")
+load_dotenv()
+print("🔧 2. .env загружен")
+
+TOKEN = os.getenv('DISCORD_TOKEN')
+print(f"🔧 3. Токен получен, длина: {len(TOKEN)}")
+
+intents = discord.Intents.default()
+intents.members = True
+intents.message_content = True
+intents.voice_states = True
+print("🔧 4. Интенты установлены")
+
+bot = discord.Bot(intents=intents)
+print("🔧 5. Бот создан")
+
+@bot.event
+async def on_ready():
+    print(f"✅ Бот {bot.user} запущен!")
+
+@bot.event
+async def on_connect():
+    print("🔧 6. Подключение к Discord установлено")
+
+@bot.event
+async def on_disconnect():
+    print("🔧 7. Отключение от Discord")
+
+print("🔧 8. Запускаем bot.run()...")
+try:
+    bot.run(TOKEN)
+except Exception as e:
+    print(f"❌ Ошибка: {e}")
+print("🔧 9. Код после bot.run()")
 
 intents = discord.Intents.default()
 intents.members = True
@@ -575,3 +609,4 @@ async def reset_password(interaction: discord.Interaction):
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot.run(TOKEN)
+
